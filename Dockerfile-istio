@@ -1,0 +1,9 @@
+FROM localhost/cachi2:latest
+
+COPY . /sources
+
+WORKDIR /sources
+
+RUN . /tmp/cachi2.env && go build
+
+ENTRYPOINT ["/tmp/istio-operator"]
