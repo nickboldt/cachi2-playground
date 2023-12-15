@@ -8,7 +8,7 @@ set -ex
 
 # clone source code
 cd $TMP_DIR
-git clone "$GIT_REPO" sources
+git clone "$GIT_REPO" sources --depth 1
 
 cd sources
 git checkout "$REF"
