@@ -54,6 +54,7 @@ fi;
 podman build -t "$OUTPUT_IMAGE" \
         -v $(realpath ./output):/tmp/output:Z \
 	-v $(realpath ./cachi2.env):/tmp/cachi2.env \
+	-v $(realpath ./output/deps/rpm/x86_64):/etc/yum.repos.d \
 	--no-cache \
 	--network=none \
 	sources
