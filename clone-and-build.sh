@@ -21,6 +21,7 @@ podman run --rm \
 	-v $(realpath ./sources):/tmp/sources:z \
 	-v $(realpath ./output):/tmp/output:z \
 	"$CACHI2_IMAGE" \
+	--log-level "DEBUG" \
 	fetch-deps "$PREFETCH_INPUT" \
 	--source "/tmp/sources" \
 	--output "/tmp/output" \
@@ -53,6 +54,7 @@ fi;
 podman build -t "$OUTPUT_IMAGE" \
         -v $(realpath ./output):/tmp/output:Z \
 	-v $(realpath ./cachi2.env):/tmp/cachi2.env \
+	--no-cache \
 	--network=none \
 	sources
 
