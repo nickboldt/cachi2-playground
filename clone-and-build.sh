@@ -2,7 +2,7 @@
 source input.env
 
 SCRIPT_DIR=$(pwd)
-TMP_DIR=$(mktemp -d)
+TMP_DIR=$(mktemp -d "/tmp/cachi2.play.XXXXXXXXXX")
 
 set -ex
 
