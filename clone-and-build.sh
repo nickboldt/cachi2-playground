@@ -52,6 +52,7 @@ sed -i 's|^\s*run |RUN . /tmp/cachi2.env \&\& \\\n    |i' "./sources/$CONTAINERF
 podman build -t "$OUTPUT_IMAGE" \
         -v $(realpath ./output):/tmp/output:Z \
 	-v $(realpath ./cachi2.env):/tmp/cachi2.env \
+	-v $(realpath ./output/deps/rpm/x86_64/repos.d):/etc/yum.repos.d \
 	--no-cache \
 	--network=none \
 	-f "./sources/$CONTAINERFILE_PATH" \
