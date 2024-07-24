@@ -38,12 +38,19 @@ podman run --rm \
 
 mv ./output/cachi2.env .
 
+# workaround until we have proper env variable support for Ruby
+echo "export BUNDLE_FORCE_RUBY_PLATFORM=true
+export BUNDLE_DEPLOYMENT=true
+export BUNDLE_CACHE_PATH=/tmp/output/deps/rubygems
+" >> ./cachi2.env
+
 # inject project files
 podman run --rm \
 	-v $(realpath ./sources):/tmp/sources:z \
 	-v $(realpath ./output):/tmp/output:z \
 	"$CACHI2_IMAGE" \
 	inject-files /tmp/output
+
 
 # use the cachi2 env variables in all RUN instructions in the Containerfile
 sed -i 's|^\s*run |RUN . /tmp/cachi2.env \&\& \\\n    |i' "./sources/$CONTAINERFILE_PATH"
