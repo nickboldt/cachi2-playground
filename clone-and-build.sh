@@ -30,7 +30,7 @@ podman run --rm \
 # generate environmnent variables
 podman run --rm \
 	-v $(realpath ./sources):/tmp/sources:z \
-        -v $(realpath ./output):/tmp/output:z \
+	-v $(realpath ./output):/tmp/output:z \
 	"$CACHI2_IMAGE" \
 	generate-env /tmp/output \
 	--format env \
@@ -40,20 +40,19 @@ mv ./output/cachi2.env .
 
 # inject project files
 podman run --rm \
-        -v $(realpath ./sources):/tmp/sources:z \
-        -v $(realpath ./output):/tmp/output:z \
-        "$CACHI2_IMAGE" \
-        inject-files /tmp/output
+	-v $(realpath ./sources):/tmp/sources:z \
+	-v $(realpath ./output):/tmp/output:z \
+	"$CACHI2_IMAGE" \
+	inject-files /tmp/output
 
 # use the cachi2 env variables in all RUN instructions in the Containerfile
 sed -i 's|^\s*run |RUN . /tmp/cachi2.env \&\& \\\n    |i' "./sources/$CONTAINERFILE_PATH"
 
 # build hermetically
 podman build -t "$OUTPUT_IMAGE" \
-        -v $(realpath ./output):/tmp/output:Z \
+	-v $(realpath ./output):/tmp/output:Z \
 	-v $(realpath ./cachi2.env):/tmp/cachi2.env \
 	--no-cache \
 	--network=none \
 	-f "./sources/$CONTAINERFILE_PATH" \
 	sources
-
