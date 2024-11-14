@@ -1,0 +1,17 @@
++ cd /tmp/cachi2.git-gitlab.cee.redhat.com-rhidp-rhdh.git_rhdh-1-rhel-9_.jKdEJERqfP
++ git clone git@gitlab.cee.redhat.com:rhidp/rhdh.git sources
+Cloning into 'sources'...
++ cd sources
++ git checkout rhdh-1-rhel-9
+Already on 'rhdh-1-rhel-9'
+Your branch is up to date with 'origin/rhdh-1-rhel-9'.
++ cd ..
++ mkdir output
+++ realpath ./sources
+++ realpath ./output
++ podman run --rm -v /tmp/cachi2.git-gitlab.cee.redhat.com-rhidp-rhdh.git_rhdh-1-rhel-9_.jKdEJERqfP/sources:/tmp/sources:z -v /tmp/cachi2.git-gitlab.cee.redhat.com-rhidp-rhdh.git_rhdh-1-rhel-9_.jKdEJERqfP/output:/tmp/output:z quay.io/redhat-appstudio/cachi2:latest --log-level DEBUG fetch-deps '{"packages": [{"path": "distgit/containers/rhdh-operator", "type": "gomod"}], "flags": ["cgo-disable"]}' --source /tmp/sources --output /tmp/output --dev-package-managers
+2024-11-14 15:08:38,983 DEBUG Testing for go mod file in /tmp/sources/distgit/containers/rhdh-operator/go.mod
+2024-11-14 15:08:40,421 ERROR FetchError: Failed to fetch the tags on the Git repository (GitCommandError) for /tmp/sources
+Error: FetchError: Failed to fetch the tags on the Git repository (GitCommandError) for /tmp/sources
+  The error might be intermittent, please try again.
+  If the issue seems to be on the Cachi2 side, please contact the maintainers.
